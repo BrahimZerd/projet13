@@ -1,23 +1,24 @@
 import {Link} from 'react-router-dom'
 import bangLogo from '../assets/argentBankLogo.png'
+import React   from 'react';
 
 
 
  function header () {
     return( 
         <header>
-    <nav class="main-nav">
-    <Link class="main-nav-logo" to="/home">
+    <nav className="main-nav">
+    <Link className="main-nav-logo" to="/">
       <img
-        class="main-nav-logo-image"
+        className="main-nav-logo-image"
         src={bangLogo}
         alt="Argent Bank Logo"
       />
-      <h1 class="sr-only">Argent Bank</h1>
+      <h1 className="sr-only">Argent Bank</h1>
     </Link>
     <div>
-      <Link class="main-nav-item" to="/sign">
-        <i class="fa fa-user-circle"></i>
+      <Link className="main-nav-item" to="/sign">
+        <i className="fa fa-user-circle"></i>
         Sign In
       </Link>
     </div>
