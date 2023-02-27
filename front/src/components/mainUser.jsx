@@ -1,12 +1,58 @@
 import React   from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Data from '../slices/auth'
+import getUserData from '../services/user.service';
+import { useReducer } from 'react';
 
 
 export default function mainUser() {
+  const user = localStorage.getItem("user")
+  const [dataUser, setData] = useState([])
+  
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const zzzz = {};
+
+  const dispatch = useDispatch()
+ 
+
+  useEffect(() => {
+    getUserData().then(
+      (response) => {
+        setData(response.body);
+      },
+      (error) => {
+        const _content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setData(_content);
+      }
+    );
+  }, []);
+
+  console.log(currentUser)
+
+
+    
+     
+      
+
+      
+
+
+
 
     return(
+      dataUser?
         <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />Tony Jarvis!</h1>
+        <h1>Welcome back<br />{dataUser.firstName} {dataUser.lastName} !</h1>
         <button className="edit-button">Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>
@@ -40,6 +86,7 @@ export default function mainUser() {
           <button className="transaction-button">View transactions</button>
         </div>
       </section>
-    </main>
+    </main>:
+     <div></div>
     )
 }

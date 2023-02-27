@@ -2,14 +2,15 @@ import React, { useState, useEffect  } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-
-import Login from '../slices/auth'
+import { Login } from "../slices/auth";
+import { setMessage } from "../slices/message";
 
 
 export default function signInContent() {
   const { isLoggedIn } = useSelector((state) => state.auth);
  let navigate = useNavigate();
 
+ const user = localStorage.getItem("user");
 
 
  const dispatch = useDispatch();
@@ -18,17 +19,25 @@ export default function signInContent() {
 
 
     async function handleSubmit (e) {
+      
       e.preventDefault()
-      const user = {};
       const email  = document.getElementById('username').value;
       const password = document.getElementById('password').value;
+      dispatch(Login({email,password}))
+      
+      
+}     
 
-    }
 
     if(isLoggedIn) {
-      return <Navigate to="/user" />
+      return (<Navigate to="/user" />)
     }
 
+
+
+
+
+   
     
  
     return(

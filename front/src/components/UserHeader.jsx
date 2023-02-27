@@ -1,24 +1,49 @@
-import { Link } from "react-router-dom"
-import React   from 'react';
+import { Link, Navigate } from "react-router-dom"
+import React, { useEffect }   from 'react';
 import bankLogo from '../assets/argentBankLogo.png'
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../slices/auth";
+import { useDispatch } from "react-redux";
+import { useCallback } from "react";
 
 
 
 export default function userHeader () {
-  const Navigate = useNavigate();
 
+  const { isLoggedIn } = useSelector((state) => state.auth);
+    const dispatch = useDispatch()
     // modification a apporté avec le nom de l'utilisateur
     //fonction déconnexion
     //ajout fonction Logout au clic et remove du token .
 
-    const { user: currentUser } = useSelector((state) => state.auth);
+    const user = localStorage.getItem("user");
 
-  if (!currentUser) {
-    return <Navigate to="/login" />;
-  }
+    
+
+      function logOut() { 
+        dispatch(logout())
+        return(<Navigate to="/" />)
+      }
+
+        
+        
+       
+       
+       
+      
+        
+
+    
+      
+      
+
+      
+    
+
+   
+   
+    
     return(
         <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -34,10 +59,10 @@ export default function userHeader () {
           <i className="fa fa-user-circle"></i>
           Tony
         </Link>
-        <Link className="main-nav-item" to="/sign" >
+        <a className="main-nav-item" href="/" onClick={logOut}  >
           <i className="fa fa-sign-out"></i>
           Sign Out
-        </Link>
+        </a>
       </div>
     </nav>
 

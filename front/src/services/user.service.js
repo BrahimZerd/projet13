@@ -1,16 +1,37 @@
-import axios from "axios";
-import authHeader from "./auth.header";
+import authHeader from "./auth-header";
 
 
-const API_URL = "localhost:3001/api/v1";
+const initialState = {
+  
+}
 
+  async function getUserData  () {
 
-const getUserProfil = () => {
-    return axios.get(API_URL + "/user/profile", { headers: authHeader() });
+  
+    
+    let loginUrl = 'http://localhost:3001/api/v1/user/profile';
+    
+    try {
+      const response =  await fetch(loginUrl, {
+        method: 'POST',
+         headers: authHeader(), 
+         body: JSON.stringify(initialState),}
+       );
+        
+      const result = await response.json()
+        if (result.status === 200)  {
+
+         
+        
+       return (result)} else {
+        throw result
+       }} catch {
+        
+       }
+      
+     
+    
 }
 
 
-
-export default {
-    getUserProfil
-}
+export default getUserData;

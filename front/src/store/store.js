@@ -4,12 +4,15 @@ import messageReducer from "../slices/message";
 
 const reducer = {
   auth: authReducer,
-  message: messageReducer
+  message: messageReducer,
+ 
 }
-
+//ajout du middlware supprimer si bug
 const store = configureStore({
   reducer: reducer,
   devTools: true,
+  
+  
 })
 
 export default store;

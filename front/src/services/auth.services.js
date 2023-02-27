@@ -1,4 +1,3 @@
-import axios from "axios";
 
 
 
@@ -6,7 +5,7 @@ import axios from "axios";
 
 
 const API_URL = "http://localhost:3001/api/v1/"
- const login = (email, password) =>{
+ export async function login  (email, password) {
 
   
   let loginBody = {
@@ -16,20 +15,26 @@ const API_URL = "http://localhost:3001/api/v1/"
   let loginUrl = 'http://localhost:3001/api/v1/user/login';
   
   try {
-    const response =  fetch(loginUrl, {
+   
+   return fetch(loginUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginBody),
-    });
-   
-    const result =  response.json();
-   localStorage.setItem('user',result.body.token)
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(loginBody),
+  })
+
+ 
     
-    console.log(result)
-    console.log(localStorage)
-    return result.data;
+
+    
+
+
+   
+    
+  
+
+  
   } catch (err) {
     
    
@@ -39,20 +44,21 @@ const API_URL = "http://localhost:3001/api/v1/"
   
 }
 
-  const logout = () => {
+  export const Logout = () => {
     localStorage.removeItem("user");
+    Location.reload()
   };
 
 
+
+
+
+
+
+
+
   
 
 
   
 
-  const authService = {
-    
-    login,
-    logout,
-  };
-  
-  export default authService;
