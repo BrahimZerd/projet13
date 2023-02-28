@@ -46,7 +46,7 @@ const API_URL = "http://localhost:3001/api/v1/"
 
   export const Logout = () => {
     localStorage.removeItem("user");
-    Location.reload()
+    
   };
 
 

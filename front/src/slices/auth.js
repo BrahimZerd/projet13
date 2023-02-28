@@ -12,7 +12,10 @@ const user = localStorage.getItem("user");
 
 
 
-const initialState = user
+const initialState = 
+
+
+user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 
@@ -62,6 +65,11 @@ const initialState = user
   const authSlice = createSlice({
     name: "auth",
     initialState,
+    reducer : {
+      setCredentials: (state, { payload }) => {
+        state.userInfo = payload
+      },
+    },
     extraReducers: {
       
       [Login.fulfilled]: (state, action) => {

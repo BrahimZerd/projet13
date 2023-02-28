@@ -12,8 +12,7 @@ export default function mainUser() {
   const user = localStorage.getItem("user")
   const [dataUser, setData] = useState([])
   
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const zzzz = {};
+ 
 
   const dispatch = useDispatch()
  
@@ -22,6 +21,7 @@ export default function mainUser() {
     getUserData().then(
       (response) => {
         setData(response.body);
+       
       },
       (error) => {
         const _content =
@@ -36,7 +36,7 @@ export default function mainUser() {
     );
   }, []);
 
-  console.log(currentUser)
+ 
 
 
     
@@ -54,6 +54,16 @@ export default function mainUser() {
       <div className="header">
         <h1>Welcome back<br />{dataUser.firstName} {dataUser.lastName} !</h1>
         <button className="edit-button">Edit Name</button>
+        <div style={{display: "flex", justifyContent:"center"}}>
+        <input placeholder={dataUser.firstName}></input>
+        <input placeholder={dataUser.lastName}></input>
+        
+        </div>
+        <div style={{display: "flex", justifyContent:"center"}}>
+        <button>Save</button>
+        <button>Cancel</button>
+        
+        </div>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
