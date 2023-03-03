@@ -1,40 +1,74 @@
 import React   from 'react';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Data from '../slices/auth'
-import getUserData from '../services/user.service';
-import { useReducer } from 'react';
-
-
+import { dataFetch } from '../slices/userData';
+import { changeNames } from '../slices/changeData';
+import { changeUserData } from '../services/user.service';
+import { useNavigate } from 'react-router-dom';
 export default function mainUser() {
   const user = localStorage.getItem("user")
-  const [dataUser, setData] = useState([])
+  const Navigate = useNavigate()
   
+  const dataUser = useSelector((state) => state.data);
+  const change = useSelector((state) => state.change)
  
 
   const dispatch = useDispatch()
+
+  dispatch(dataFetch())
+  .then(response => {return response})
+
+
+
  
+  const EditButton = document.getElementById('edit-button')
+  const SaveButton = document.getElementById('save-button')
+  
+  function showEdit() {
 
-  useEffect(() => {
-    getUserData().then(
-      (response) => {
-        setData(response.body);
-       
-      },
-      (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+    
+    const EditButton = document.getElementById('edit-button')
+  const SaveButton = document.getElementById('save-button')
+    EditButton.style.display = "none";
+    SaveButton.style.display = "block";
+  }
 
-        setData(_content);
-      }
-    );
-  }, []);
+
+  function hideEdit() {
+
+
+    EditButton.style.display = "initial";
+   
+    SaveButton.style.display = "none";
+  }
+
+
+  function saveNewUserInfos() {
+    
+      const newFirstName  = document.getElementById('newfirstName').value;
+      const newLastName = document.getElementById('newlastName').value;
+     // dispatch(changeNames(newFirstName, newLastName))
+      //.then(response => {console.log(response)})
+      changeUserData(newFirstName,newLastName)
+      .then(response => response.json())
+      .then(response => response)
+      setTimeout(() => {
+        document.location.reload();
+      }, 1000);
+      
+      
+      
+
+      
+     
+      
+
+  }
+
+
+    
+
+  
 
  
 
@@ -53,16 +87,18 @@ export default function mainUser() {
         <main className="main bg-dark">
       <div className="header">
         <h1>Welcome back<br />{dataUser.firstName} {dataUser.lastName} !</h1>
-        <button className="edit-button">Edit Name</button>
+        <button className="edit-button" id="edit-button" onClick={showEdit}>Edit Name</button>
+        <div  style ={{display: "none"}} id="save-button">
         <div style={{display: "flex", justifyContent:"center"}}>
-        <input placeholder={dataUser.firstName}></input>
-        <input placeholder={dataUser.lastName}></input>
+        <input placeholder={dataUser.firstName}id="newfirstName"></input>
+        <input placeholder={dataUser.lastName} id="newlastName"></input>
         
         </div>
-        <div style={{display: "flex", justifyContent:"center"}}>
-        <button>Save</button>
-        <button>Cancel</button>
+        <div  style={{display: "flex", justifyContent:"center"}}>
+        <button onClick={saveNewUserInfos}>Save</button>
+        <button onClick={hideEdit}>Cancel</button>
         
+        </div>
         </div>
       </div>
       <h2 className="sr-only">Accounts</h2>

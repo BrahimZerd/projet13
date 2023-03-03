@@ -11,7 +11,7 @@ import { useCallback } from "react";
 
 export default function userHeader () {
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const dataUser = useSelector((state) => state.data);
     const dispatch = useDispatch()
     // modification a apporté avec le nom de l'utilisateur
     //fonction déconnexion
@@ -57,7 +57,7 @@ export default function userHeader () {
       <div>
         <Link className="main-nav-item" to="./user">
           <i className="fa fa-user-circle"></i>
-          Tony
+          {dataUser.firstName}
         </Link>
         <a className="main-nav-item" href="/" onClick={logOut}  >
           <i className="fa fa-sign-out"></i>

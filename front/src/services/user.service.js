@@ -23,7 +23,7 @@ const initialState = {
 
          
         
-       return (result)} else {
+       return result} else {
         throw result
        }} catch {
         
@@ -33,5 +33,27 @@ const initialState = {
     
 }
 
+const user = localStorage.getItem('user');
+
+export async function changeUserData(newfirstName, newlastName) {
+  let loginUrl = 'http://localhost:3001/api/v1/user/profile';
+  return await  fetch(loginUrl, {
+        method: 'PUT',
+        headers: { 
+          Authorization: 'Bearer ' + user,
+          "Content-Type": "application/json",
+        }, 
+
+        body: JSON.stringify({
+          firstName: newfirstName,
+          lastName: newlastName
+        })
+      }
+     );
+     
+}
 
 export default getUserData;
+
+
+
