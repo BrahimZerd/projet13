@@ -1,13 +1,10 @@
 
-import AuthService from "../services/auth.services";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
 import {login} from '../services/auth.services'
 import { Logout } from "../services/auth.services";
-import authService from "../services/auth.services";
-import getUserData from "../services/user.service";
-import { useState } from "react";
+
 const user = localStorage.getItem("user");
 
 
@@ -20,10 +17,8 @@ user
   : { isLoggedIn: false, user: null };
 
 
-   export const Login = createAsyncThunk(
-    
-     
-    "auth",
+   export const Login = createAsyncThunk("auth",
+   
     async ({ email, password }, thunkAPI) => {
       try {
         await login(email, password)
@@ -33,12 +28,7 @@ user
           
           return { user: response }
         })
-        
-       
-        
-
-
-      } catch (error) {
+        } catch (error) {
         const message =
           (error.response &&
             error.response.data &&

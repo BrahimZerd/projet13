@@ -6,27 +6,7 @@ import Footer from "../components/Footer";
 
 function UserPage() {
   
-    
-  
-
-
- 
-     
-
-
-
-
-
-      
-
-
-
-  
-
-  
-
-
-  return (
+return (
     <div>
     <UserHeader />
     <MainUser />

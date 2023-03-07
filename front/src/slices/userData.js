@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import getUserData from "../services/user.service";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux"
-import { changeUserData } from "../services/user.service";
-
-const initialState =  {
+import { changeNames } from "./changeData";
+ export const initialState =  {
    firstName: "",
    lastName: "",
    id:"",
@@ -17,30 +15,15 @@ const user = {}
 
 
 export const dataFetch = createAsyncThunk("data", async () => {
-    const dispatch = useDispatch()
     const promise =  await getUserData(user) // fetch avec TOKEN
-    .then(response =>  {
-        
-        return  response.body
-        
-        })
-
-      const data = await promise;
+    .then(response =>  {return  response.body})
+     const data = await promise;
       return data  
-    }
-    
-    
-
-    )
-
+    })
 
 
     
-          
-   
-  
-    
- 
+
 const dataSlice = createSlice({
     name: "data",
     initialState,
@@ -52,19 +35,18 @@ const dataSlice = createSlice({
          state.lastName = action.payload.lastName
          state.email = action.payload.email
          state.id = action.payload.id
+         
          },
         [dataFetch.rejected]: (state, action) => {
             
-        },
+        }},
         
-    
-      
-     },});
+});
 
 
 
 
-     const { reducer, actions } = dataSlice;
+     const { reducer } = dataSlice;
      
 
 export const { setUser } = dataSlice.actions

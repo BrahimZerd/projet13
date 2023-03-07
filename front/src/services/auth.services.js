@@ -4,15 +4,12 @@
 
 
 
-const API_URL = "http://localhost:3001/api/v1/"
  export async function login  (email, password) {
-
-  
-  let loginBody = {
+    let loginBody = {
     email: email,
     password: password,
-  };
-  let loginUrl = 'http://localhost:3001/api/v1/user/login';
+    };
+    let loginUrl = 'http://localhost:3001/api/v1/user/login';
   
   try {
    
@@ -24,22 +21,8 @@ const API_URL = "http://localhost:3001/api/v1/"
     body: JSON.stringify(loginBody),
   })
 
- 
-    
-
-    
-
-
-   
-    
-  
-
-  
-  } catch (err) {
-    
-   
-    return err;
-    
+} catch (err) {
+  return err;
   }
   
 }

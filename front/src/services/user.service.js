@@ -6,10 +6,7 @@ const initialState = {
 }
 
   async function getUserData  () {
-
-  
-    
-    let loginUrl = 'http://localhost:3001/api/v1/user/profile';
+  let loginUrl = 'http://localhost:3001/api/v1/user/profile';
     
     try {
       const response =  await fetch(loginUrl, {
@@ -20,12 +17,11 @@ const initialState = {
         
       const result = await response.json()
         if (result.status === 200)  {
-
-         
-        
-       return result} else {
+        return result
+      }else{
         throw result
-       }} catch {
+       }
+      } catch {
         
        }
       

@@ -2,21 +2,18 @@ import React   from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { dataFetch } from '../slices/userData';
-import { changeNames } from '../slices/changeData';
 import { changeUserData } from '../services/user.service';
-import { useNavigate } from 'react-router-dom';
+import { changeNames } from '../slices/changeData';
 export default function mainUser() {
-  const user = localStorage.getItem("user")
-  const Navigate = useNavigate()
   
   const dataUser = useSelector((state) => state.data);
-  const change = useSelector((state) => state.change)
+  const changeUserName = useSelector((state) => state.change)
  
 
   const dispatch = useDispatch()
 
   dispatch(dataFetch())
-  .then(response => {return response})
+  .then(response => {return  response})
 
 
 
@@ -49,22 +46,17 @@ export default function mainUser() {
       const newLastName = document.getElementById('newlastName').value;
      // dispatch(changeNames(newFirstName, newLastName))
       //.then(response => {console.log(response)})
-      changeUserData(newFirstName,newLastName)
-      .then(response => response.json())
-      .then(response => response)
-      setTimeout(() => {
+      dispatch(changeNames({newFirstName,newLastName}))
+      .then(response => {return  response})
+      
+     /* setTimeout(() => {
         document.location.reload();
-      }, 1000);
-      
-      
-      
-
-      
-     
-      
+      }, 3000); */
+      console.log(dataUser)
 
   }
-
+  console.log(changeUserName)
+  console.log(dataUser)
 
     
 
@@ -86,7 +78,7 @@ export default function mainUser() {
       dataUser?
         <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />{dataUser.firstName} {dataUser.lastName} !</h1>
+        <h1>Welcome back<br />{dataUser.firstName} {dataUser.lastName}  </h1>
         <button className="edit-button" id="edit-button" onClick={showEdit}>Edit Name</button>
         <div  style ={{display: "none"}} id="save-button">
         <div style={{display: "flex", justifyContent:"center"}}>

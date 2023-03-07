@@ -1,50 +1,28 @@
 import { Link, Navigate } from "react-router-dom"
-import React, { useEffect }   from 'react';
+import React   from 'react';
 import bankLogo from '../assets/argentBankLogo.png'
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../slices/auth";
 import { useDispatch } from "react-redux";
-import { useCallback } from "react";
+
 
 
 
 export default function userHeader () {
 
   const dataUser = useSelector((state) => state.data);
+  
     const dispatch = useDispatch()
     // modification a apporté avec le nom de l'utilisateur
     //fonction déconnexion
     //ajout fonction Logout au clic et remove du token .
-
-    const user = localStorage.getItem("user");
-
-    
-
-      function logOut() { 
+   
+    function logOut() { 
         dispatch(logout())
         return(<Navigate to="/" />)
       }
 
-        
-        
-       
-       
-       
-      
-        
-
-    
-      
-      
-
-      
-    
-
-   
-   
-    
-    return(
+return(
         <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
         <img

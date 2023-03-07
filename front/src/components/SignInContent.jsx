@@ -1,24 +1,15 @@
-import React, { useState, useEffect  } from "react";
+import React  from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Login } from "../slices/auth";
-import { setMessage } from "../slices/message";
 
-
+//isLoggedIn vérifie si le token est dans le localstate, si la valeur n'est pas null, renvois vers la page profile
 export default function signInContent() {
   const { isLoggedIn } = useSelector((state) => state.auth);
- let navigate = useNavigate();
-
- const user = localStorage.getItem("user");
-
-
- const dispatch = useDispatch();
-
-
-
-
-    async function handleSubmit (e) {
+  
+  const dispatch = useDispatch();
+  
+  async function handleSubmit (e) {
       
       e.preventDefault()
       const email  = document.getElementById('username').value;
@@ -27,20 +18,11 @@ export default function signInContent() {
       
       
 }     
-
-
-    if(isLoggedIn) {
+  if(isLoggedIn) {
       return (<Navigate to="/user" />)
     }
 
-
-
-
-
-   
-    
- 
-    return(
+return(
         <main className="main bg-dark">
         <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
