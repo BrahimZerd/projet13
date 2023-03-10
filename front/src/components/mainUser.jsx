@@ -7,17 +7,13 @@ import { changeNames } from '../slices/changeData';
 export default function mainUser() {
   
   const dataUser = useSelector((state) => state.data);
-  const changeUserName = useSelector((state) => state.change)
+  const changeData = useSelector((state) => state.change);
  
 
   const dispatch = useDispatch()
 
   dispatch(dataFetch())
   .then(response => {return  response})
-
-
-
- 
   const EditButton = document.getElementById('edit-button')
   const SaveButton = document.getElementById('save-button')
   
@@ -44,37 +40,17 @@ export default function mainUser() {
     
       const newFirstName  = document.getElementById('newfirstName').value;
       const newLastName = document.getElementById('newlastName').value;
-     // dispatch(changeNames(newFirstName, newLastName))
-      //.then(response => {console.log(response)})
-      dispatch(changeNames({newFirstName,newLastName}))
-      .then(response => {return  response})
       
-     /* setTimeout(() => {
-        document.location.reload();
-      }, 3000); */
-      console.log(dataUser)
-
-  }
-  console.log(changeUserName)
-  console.log(dataUser)
-
+     dispatch(changeNames({firstName : newFirstName,lastName : newLastName}))
+     .then(hideEdit())
+    /* .then(setTimeout(() => window.location.reload(), 2000)) */
     
-
-  
-
- 
-
-
     
-     
       
-
-      
-
+    }
 
 
-
-    return(
+  return(
       dataUser?
         <main className="main bg-dark">
       <div className="header">

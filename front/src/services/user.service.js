@@ -1,3 +1,4 @@
+import { stringify } from "yamljs";
 import authHeader from "./auth-header";
 
 
@@ -8,7 +9,7 @@ const initialState = {
   async function getUserData  () {
   let loginUrl = 'http://localhost:3001/api/v1/user/profile';
     
-    try {
+    
       const response =  await fetch(loginUrl, {
         method: 'POST',
          headers: authHeader(), 
@@ -21,29 +22,26 @@ const initialState = {
       }else{
         throw result
        }
-      } catch {
-        
-       }
+      } 
       
      
     
-}
+
 
 const user = localStorage.getItem('user');
 
-export async function changeUserData(newfirstName, newlastName) {
+export async function changeUserData(loginBody) {
+  console.log(loginBody)
+
   let loginUrl = 'http://localhost:3001/api/v1/user/profile';
-  return await  fetch(loginUrl, {
+  return   await fetch(loginUrl, {
         method: 'PUT',
         headers: { 
-          Authorization: 'Bearer ' + user,
+          "Authorization": 'Bearer ' + user,
           "Content-Type": "application/json",
         }, 
-
-        body: JSON.stringify({
-          firstName: newfirstName,
-          lastName: newlastName
-        })
+        body :  JSON.stringify(loginBody)
+       
       }
      );
      

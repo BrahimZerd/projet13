@@ -9,32 +9,31 @@ const initialState =  {
 
 const user = {}
 
-export const changeNames = createAsyncThunk("changeNames", async () => {
-   return await changeUserData()
-     .then(response => response.json())
-     
-     
-    })
+export const changeNames = createAsyncThunk("changeNames", async (arg) => {
+   
+   return await changeUserData(arg)
+    
+     .then(response =>{return(response.json())})
+})
+
+
 
 
 
 
 const changeSlice = createSlice({
-    name: "data",
-    initialState,
-    extraReducers: {
-        [changeNames.fulfilled] : (state,action) => {
-          
-            state.firstName = action.meta.arg.newFirstName
-           state.lastName = action.meta.arg.newLastName
-            console.log(action)
-            console.log(state)
-            
+  name: "changeNames",
+  initialState,
+  extraReducers: {
+    [changeNames.fulfilled] : (state, action) => {
+      console.log(action.payload)
+      state.firstName = action.payload.body.firstName
+      state.lastName = action.payload.body.lastName
     }
-    }
+  }
 })
 
 
-const { reducer } = changeSlice;
 
+const {reducer} = changeSlice
 export default reducer;

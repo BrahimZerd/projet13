@@ -22,8 +22,6 @@ export const dataFetch = createAsyncThunk("data", async () => {
     })
 
 
-    
-
 const dataSlice = createSlice({
     name: "data",
     initialState,
@@ -35,18 +33,17 @@ const dataSlice = createSlice({
          state.lastName = action.payload.lastName
          state.email = action.payload.email
          state.id = action.payload.id
+       
          
-         },
-        [dataFetch.rejected]: (state, action) => {
-            
-        }},
+         }}
         
 });
 
 
 
 
-     const { reducer } = dataSlice;
+     const { reducer } = dataSlice
+     
      
 
 export const { setUser } = dataSlice.actions
