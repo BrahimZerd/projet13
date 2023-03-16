@@ -2,13 +2,20 @@ import React   from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { dataFetch } from '../slices/userData';
-import { changeUserData } from '../services/user.service';
 import { changeNames } from '../slices/changeData';
+import { logout } from '../slices/auth';
+/** @const dataUser get the state of data fetched*/
+
+/** @function showEdit activ input with lastname & firstname */
+/** @function hideEdit hide input when we click on Send button */
+/** @function saveNewUserInfos dispatch the function changeNames with @param {newFirstName} & @param {newLastName} String catching from input*/
+
+
+
 export default function mainUser() {
   
   const dataUser = useSelector((state) => state.data);
   const changeData = useSelector((state) => state.change);
- 
 
   const dispatch = useDispatch()
 
@@ -40,14 +47,11 @@ export default function mainUser() {
     
       const newFirstName  = document.getElementById('newfirstName').value;
       const newLastName = document.getElementById('newlastName').value;
-      
-     dispatch(changeNames({firstName : newFirstName,lastName : newLastName}))
+      dispatch(changeNames({firstName : newFirstName,lastName : newLastName}))
      .then(hideEdit())
-    /* .then(setTimeout(() => window.location.reload(), 2000)) */
-    
-    
-      
     }
+  
+    
 
 
   return(

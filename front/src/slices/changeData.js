@@ -7,7 +7,10 @@ const initialState =  {
    lastName: "",
  }
 
-const user = {}
+/** changeNames is waiting for changeUserData to use it via the store and dispatch the new data on the components
+ * @param {Object} arg contains formated data with firstname & lastName to be return to change them
+ * */
+
 
 export const changeNames = createAsyncThunk("changeNames", async (arg) => {
    
@@ -26,7 +29,7 @@ const changeSlice = createSlice({
   initialState,
   extraReducers: {
     [changeNames.fulfilled] : (state, action) => {
-      console.log(action.payload)
+      
       state.firstName = action.payload.body.firstName
       state.lastName = action.payload.body.lastName
     }

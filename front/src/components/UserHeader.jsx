@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 export default function userHeader () {
 
   const dataUser = useSelector((state) => state.data);
-  
+
     const dispatch = useDispatch()
     // modification a apporté avec le nom de l'utilisateur
     //fonction déconnexion
@@ -22,7 +22,9 @@ export default function userHeader () {
         return(<Navigate to="/" />)
       }
 
-return(
+    //display function logout when you close the window, to delete user and need to relog//  
+    window.addEventListener('beforeunload',logOut)
+  return(
         <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
         <img

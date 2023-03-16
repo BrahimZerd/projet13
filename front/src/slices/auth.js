@@ -1,26 +1,31 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { setMessage } from "./message";
 import {login} from '../services/auth.services'
 import { Logout } from "../services/auth.services";
 
+
+/** User set the storate to put the information and security token in the alocalstorage, if token is inside the user object
+ * isLogged in go in True, else it goes in false
+ */
+
 const user = localStorage.getItem("user");
-
-
-
 const initialState = 
-
-
 user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 
 
+  /** Login is waiting for login to use it via the store and dispatch via the store the connection to the database base thrw the user
+   * 
+ * @param {Object} email contains formated data with email & password to permit to access to the userpage
+ * */
+
+
    export const Login = createAsyncThunk("auth",
    
     async ({ email, password }, thunkAPI) => {
-      try {
+      
         await login(email, password)
         .then(response => response.json())
         .then(response => {
@@ -28,16 +33,7 @@ user
           
           return { user: response }
         })
-        } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue();
-      }
+        
     }
   );
   

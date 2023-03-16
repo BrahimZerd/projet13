@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import getUserData from "../services/user.service";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { changeNames } from "./changeData";
  export const initialState =  {
    firstName: "",
    lastName: "",
@@ -33,9 +32,7 @@ const dataSlice = createSlice({
          state.lastName = action.payload.lastName
          state.email = action.payload.email
          state.id = action.payload.id
-       
-         
-         }}
+       }}
         
 });
 
